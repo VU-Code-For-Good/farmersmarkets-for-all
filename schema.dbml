@@ -21,6 +21,7 @@ Table FarmersMarket {
 }
 
 Table BusinessRepresentative {
+  id int [PK]
   name varchar
   businessId int [ref: > Business.id]
 }
