@@ -1,0 +1,26 @@
+Table ContactInfo {
+  id int [PK]
+  phone int
+  address varchar
+  email varchar
+  website varchar
+}
+
+Table Business {
+  id int [PK]
+  contact int [ref: > ContactInfo.id]
+  description varchar
+  marketIds int[] [ref: <> FarmersMarket.id]
+}
+
+Table FarmersMarket {
+  id int [PK]
+  isSnapFriendly bool
+  name varchar
+  contact int [ref: > ContactInfo.id]
+}
+
+Table BusinessRepresentative {
+  name varchar
+  businessId int [ref: > Business.id]
+}
