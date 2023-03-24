@@ -1,3 +1,28 @@
+enum month {
+    January
+    February
+    March
+    April
+    May
+    June
+    July
+    August
+    September
+    October
+    November
+    December
+}
+
+enum day {
+  Monday
+  Tuesday
+  Wednesday
+  Thursday
+  Friday
+  Saturday
+  Sunday
+}
+
 Table ContactInfo {
   id int [PK]
   phone int
@@ -13,8 +38,26 @@ Table Business {
 }
 
 Table ManyBusinessManyFarmersMarkets{
-  businessId int [PK, ref: > Business.id]
-  farmersMarketId int [PK, ref: > FarmersMarket.id] 
+  businessId int [PK, ref: - Business.id]
+  farmersMarketId int [PK, ref: - FarmersMarket.id] 
+}
+
+Table OperatingDays {
+  id int [PK]
+  marketId int [PK, ref: > FarmersMarket.id]
+  Day day
+}
+
+Table OperatingMonths {
+  marketId int [PK, ref: > FarmersMarket.id]
+  Month month
+}
+
+Table OperatingHours {
+  dayId int [PK, ref: > OperatingDays.id]
+  from int [PK]
+  to int [PK]
+  timezone string
 }
 
 Table FarmersMarket {
