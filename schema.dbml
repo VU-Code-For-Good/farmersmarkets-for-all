@@ -7,9 +7,14 @@ Table ContactInfo {
 }
 
 Table Business {
-  id int [PK, ref: <> FarmersMarket.id]
+  id int [PK]
   contact int [ref: > ContactInfo.id]
   description varchar
+}
+
+Table ManyBusinessManyFarmersMarkets{
+  businessId int [PK, ref: > Business.id]
+  farmersMarketId int [PK, ref: > FarmersMarket.id] 
 }
 
 Table FarmersMarket {
