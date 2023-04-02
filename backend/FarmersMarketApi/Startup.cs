@@ -78,8 +78,7 @@ namespace IO.Swagger
                         Contact = new OpenApiContact()
                         {
                            Name = "Swagger Codegen Contributors",
-                           Url = new Uri("https://github.com/swagger-api/swagger-codegen"),
-                           Email = ""
+                           Url = new Uri("https://github.com/swagger-api/swagger-codegen")
                         }
                     });
                     c.CustomSchemaIds(type => type.FullName);
