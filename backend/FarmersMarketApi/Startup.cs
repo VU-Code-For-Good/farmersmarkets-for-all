@@ -80,11 +80,10 @@ namespace IO.Swagger
                            Name = "Swagger Codegen Contributors",
                            Url = new Uri("https://github.com/swagger-api/swagger-codegen"),
                            Email = ""
-                        },
-                        TermsOfService = new Uri("")
+                        }
                     });
                     c.CustomSchemaIds(type => type.FullName);
-                    c.IncludeXmlComments($"{AppContext.BaseDirectory}{Path.DirectorySeparatorChar}{_hostingEnv.ApplicationName}.xml");
+                
 
                     // Include DataAnnotation attributes on Controller Action parameters as Swagger validation rules (e.g required, pattern, ..)
                     // Use [ValidateModelState] on Actions to actually validate it in C# as well!
@@ -112,10 +111,12 @@ namespace IO.Swagger
             {
                 //TODO: Either use the SwaggerGen generated Swagger contract (generated from C# classes)
                 c.SwaggerEndpoint("/swagger/1.0.11/swagger.json", "Farmer's Markets - OpenAPI 3.0");
+            
 
                 //TODO: Or alternatively use the original Swagger contract that's included in the static files
-                // c.SwaggerEndpoint("/swagger-original.json", "Farmer's Markets - OpenAPI 3.0 Original");
+                // c.SwaggerEndpoint("/..swagger-original.json", "Farmer's Markets - OpenAPI 3.0 Original");
             });
+  
 
             //TODO: Use Https Redirection
             // app.UseHttpsRedirection();
