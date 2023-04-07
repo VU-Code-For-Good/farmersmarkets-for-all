@@ -1,6 +1,6 @@
 # FarmersMarket
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.5.
+Project structure: https://www.thirdrocktechkno.com/blog/angular-architecture-best-practices/
 
 ## Development server
 
