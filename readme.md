@@ -5,7 +5,7 @@ Farmers Markets for All is a web application that helps users find farmers marke
 To get started with Farmers Markets for All, you will need to clone this repository to your local machine. You will also need to install the following dependencies:
 
 Angular CLI
-- .NET 5 SDK
+- .NET 6 SDK
 - SQLite
 - To run the frontend, navigate to the frontend directory and run the following command:
 
