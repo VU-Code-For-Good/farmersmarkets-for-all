@@ -1,2 +1,9 @@
+################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+.vs
+.vscode
+/DataImportTool/FarmsMarketXMLReader/obj
+/DataImportTool/FarmsMarketXMLReader/bin/Debug/net6.0
 .vs
 .vscode
