@@ -1,8 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿
 using FarmsMarketXMLReader;
 
-
 Console.WriteLine("starting");
-new XmlReader().ReadFile();
+
+var reader = new CSVMarketReader("dat/SNAP.csv");
+var records = reader.ReadMarkets();
 
 Console.WriteLine("Done");
