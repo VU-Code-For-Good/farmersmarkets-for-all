@@ -4,3 +4,5 @@
 
 /DataImportTool/FarmsMarketXMLReader/obj
 /DataImportTool/FarmsMarketXMLReader/bin/Debug/net6.0
+.vs
+.vscode
