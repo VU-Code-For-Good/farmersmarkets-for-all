@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace IO.Swagger.Attributes
+namespace FarmersMarketApi.Attributes
 {
     /// <summary>
     /// Model state validation attribute

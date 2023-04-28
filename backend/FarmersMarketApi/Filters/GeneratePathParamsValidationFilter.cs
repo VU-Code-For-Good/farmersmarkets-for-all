@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace IO.Swagger.Filters
+namespace FarmersMarketApi.Filters
 {
     /// <summary>
     /// Path Parameter Validation Rules Filter
