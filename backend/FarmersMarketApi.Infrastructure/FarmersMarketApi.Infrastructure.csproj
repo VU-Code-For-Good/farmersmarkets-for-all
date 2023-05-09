@@ -5,5 +5,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
+  <ItemGroup>
+     <ProjectReference Include="..\FarmersMarketApi.Application\FarmersMarketApi.Application.csproj" />
+      <ProjectReference Include="..\FarmersMarketApi.Domain\FarmersMarketApi.Domain.csproj" />
+  </ItemGroup>
 </Project>
