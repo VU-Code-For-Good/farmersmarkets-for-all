@@ -1,11 +1,10 @@
-using System;
 using FarmersMarketApi.Application.Blls;
 using FarmersMarketApi.Application.InfrastructureInterfaces;
 using FarmersMarketApi.Domain.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace FarmersMarketApi.Tests.FarmersMarketApplication
+namespace FarmersMarketApi.Tests.FarmersMarketApplication.Unit
 {
     [TestClass, TestCategory("Unit")]
     public class GetFarmersMarketsByStateAsyncShould
@@ -13,7 +12,7 @@ namespace FarmersMarketApi.Tests.FarmersMarketApplication
         private IFarmersMarketBll _sut;
         private Mock<IFarmersMarketRepository> _farmersMarketRepository;
         private string _expectedState;
-        
+
         [TestInitialize]
         public void SetUp()
         {
@@ -23,7 +22,7 @@ namespace FarmersMarketApi.Tests.FarmersMarketApplication
         }
 
         [TestMethod]
-        public async Task ReturnFarmersMarketsForGivenState()   
+        public async Task ReturnFarmersMarketsForGivenState()
         {
             _farmersMarketRepository.Setup(repo => repo.GetFarmersMarkets(_expectedState)).ReturnsAsync(new List<FarmersMarket>{
                new FarmersMarket
@@ -57,14 +56,14 @@ namespace FarmersMarketApi.Tests.FarmersMarketApplication
                         StreetAddress = "123 Farmers Street",
                         ZipCode = "65203"
                     }
-               } 
+               }
             });
 
-            var farmersMarkets = await _sut.GetFarmersMarketsByStateAsync(_expectedState);
+            var farmersMarkets = await _sut.GetFarmersMarketsAsync(_expectedState);
 
             Assert.IsTrue(farmersMarkets.All(mkt => mkt.Address.State.Equals(_expectedState)));
             Assert.IsTrue(farmersMarkets.Count == 2);
-            
+
 
         }
 

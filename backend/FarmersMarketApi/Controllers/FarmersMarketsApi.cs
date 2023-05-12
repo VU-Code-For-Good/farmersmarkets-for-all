@@ -89,7 +89,7 @@ namespace FarmersMarketApi.Controllers
 
             try
             {
-                var farmersMarkets = await _farmersMarketBll.GetFarmersMarketsByStateAsync(state);
+                var farmersMarkets = await _farmersMarketBll.GetFarmersMarketsAsync(state);
 
                 if (!farmersMarkets.Any())
                 {

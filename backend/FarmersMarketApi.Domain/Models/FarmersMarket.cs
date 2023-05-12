@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FarmersMarketApi.Domain.Models
+﻿namespace FarmersMarketApi.Domain.Models
 {
     public class FarmersMarket
     { public Guid Id { get; set; }

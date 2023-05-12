@@ -13,5 +13,6 @@
   </ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\FarmersMarketApi.Application\FarmersMarketApi.Application.csproj" />
+	  <ProjectReference Include="..\FarmersMarketApi.Infrastructure\FarmersMarketApi.Infrastructure.csproj" />
 	</ItemGroup>
 </Project>

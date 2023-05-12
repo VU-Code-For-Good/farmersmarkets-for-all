@@ -1,4 +1,3 @@
-using System;
 using FarmersMarketApi.Domain.Models;
 
 namespace FarmersMarketApi.Application.InfrastructureInterfaces

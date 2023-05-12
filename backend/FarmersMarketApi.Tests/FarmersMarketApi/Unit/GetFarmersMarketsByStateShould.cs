@@ -28,7 +28,7 @@ public class GetFarmersMarketsByStateShould
     [TestMethod]
     public async Task Return200_WhenThereAreFarmersMarketsForAGivenState()
     {
-        _farmersMarketBll.Setup(bll => bll.GetFarmersMarketsByStateAsync(_expectedState)).ReturnsAsync(new List<FarmersMarket>
+        _farmersMarketBll.Setup(bll => bll.GetFarmersMarketsAsync(_expectedState)).ReturnsAsync(new List<FarmersMarket>
         {
             new()
             {
@@ -89,7 +89,7 @@ public class GetFarmersMarketsByStateShould
     [TestMethod]
     public async Task Return404_WhenNoFarmersMarketsAreFoundForSpecifiedState()
     {
-        _farmersMarketBll.Setup(bll => bll.GetFarmersMarketsByStateAsync(_expectedState)).ReturnsAsync(new List<FarmersMarket>());
+        _farmersMarketBll.Setup(bll => bll.GetFarmersMarketsAsync(_expectedState)).ReturnsAsync(new List<FarmersMarket>());
 
         var response = await _sut.GetFarmersMarketsByState(_expectedState) as ObjectResult;
         var modelApiResponse = response?.Value as ModelApiResponse;
@@ -104,7 +104,7 @@ public class GetFarmersMarketsByStateShould
     [TestMethod]
     public async Task Return500_WhenAnUnexpectedErrorOccurs()
     {
-        _farmersMarketBll.Setup(bll => bll.GetFarmersMarketsByStateAsync(_expectedState)).Throws<Exception>();
+        _farmersMarketBll.Setup(bll => bll.GetFarmersMarketsAsync(_expectedState)).Throws<Exception>();
 
         var response = await _sut.GetFarmersMarketsByState(_expectedState) as ObjectResult;
         var modelApiResponse = response?.Value as ModelApiResponse;
