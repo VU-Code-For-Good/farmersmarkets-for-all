@@ -12,6 +12,6 @@ namespace FarmersMarketApi.Infrastructure.Contexts
         {
             _filePath = filePath;
         }
-        public IDbConnection CreateConnection() => new SqliteConnection(_filePath);
+        public IDbConnection CreateConnection() => new SqliteConnection($"Data Source={_filePath}");
     }
 }

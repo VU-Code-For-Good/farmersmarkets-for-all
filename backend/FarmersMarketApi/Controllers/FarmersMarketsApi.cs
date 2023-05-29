@@ -77,7 +77,7 @@ namespace FarmersMarketApi.Controllers
         [SwaggerResponse(statusCode: 500, type: typeof(ModelApiResponse), description: "Unexpected error occurred")]
         public virtual async Task<IActionResult> GetFarmersMarketsByState([FromRoute][Required][StringLength(2, MinimumLength=2)] string state)
         {
-            if (!StateMap.States.TryGetValue(state, out _))
+            if (!StateMap.States.TryGetValue(state.ToUpper(), out _))
             {
                 return StatusCode(400, new ModelApiResponse
                 {
@@ -109,10 +109,8 @@ namespace FarmersMarketApi.Controllers
                         Id = market.Id,
                         Name = market.Name,
                         Phone = market.Phone,
-                        StreetAddress = market.Address.StreetAddress,
-                        City = market.Address.City,
-                        State = market.Address.State,
-                        ZipCode = market.Address.ZipCode,
+                        //TODO probably should just make this the whole address
+                        StreetAddress = market.Address,
                         Email = market.Email,
                         Website = market.Website,
                     }).ToList()

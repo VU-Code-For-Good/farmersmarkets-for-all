@@ -14,6 +14,7 @@ using FarmersMarketApi.Infrastructure;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using SQLitePCL;
 
 namespace FarmersMarketApi
 {
@@ -43,6 +44,7 @@ namespace FarmersMarketApi
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            Batteries.Init();
             services.AddApplicationServices();
             services.AddInfrastructureServices();
             services.AddExternalInfrastructureServices(Configuration);

@@ -23,9 +23,9 @@ namespace FarmersMarketApi.Models
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-
+        //TODO had to make this a long
         [DataMember(Name="id")]
-        public Guid? Id { get; set; }
+        public long? Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
