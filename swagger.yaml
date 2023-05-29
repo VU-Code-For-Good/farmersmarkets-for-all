@@ -117,14 +117,14 @@ components:
           format: uuid
         Name:
           type: string
-        isSnapFriendly:
-          type: boolean 
-        operatingHours:
-          type: string
-        operatingDays:
-          type: string
+        operatingDay:
+          type: array
+          items:
+            $ref: '#/components/schemas/OperatingDay'
         operatingMonths:
-          type: string
+          type: array
+          items:
+            type: string
         phone:
           type: string
         streetAddress:
@@ -148,6 +148,13 @@ components:
       type: object
       properties:
         links:
+          type: string
+    OperatingDay:
+      type: object
+      properties:
+        day:
+          type: string
+        operatingHours:
           type: string
     ApiResponse:
       type: object
