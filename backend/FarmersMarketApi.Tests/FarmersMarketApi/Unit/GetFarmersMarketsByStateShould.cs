@@ -35,13 +35,10 @@ public class GetFarmersMarketsByStateShould
                 Id = 123,
                 Name = "My Market",
                 OperationTimes = new OperationTimes(),
-                //Address = new Address
-                //{
-                //    StreetAddress = "123 Farmers Street",
-                //    City = "Columbia",
-                //    State = "MO",
-                //    ZipCode = "65203"
-                //},
+                StreetAddress = "123 Farmers Street",
+                City = "Columbia",
+                State = "MO",
+                ZipCode = "65203",
                 Phone = "6605551109",
                 Email = "farmer@market.com",
                 Website = "farmer.com"
@@ -51,13 +48,10 @@ public class GetFarmersMarketsByStateShould
                 Id = 456,
                 Name = "My Other Market",
                 OperationTimes = new OperationTimes(),
-                //Address = new Address
-                //{
-                //    StreetAddress = "123 Farmers Street",
-                //    City = "Columbia",
-                //    State = "MO",
-                //    ZipCode = "65203"
-                //}
+                StreetAddress = "123 Farmers Street",
+                City = "Columbia",
+                State = "MO",
+                ZipCode = "65203",
                 Phone = "6605551109",
                 Email = "farmer@market.com",
                 Website = "farmer.com"

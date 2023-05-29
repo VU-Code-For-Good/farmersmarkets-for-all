@@ -32,14 +32,10 @@ namespace FarmersMarketApi.Tests.FarmersMarketApplication.Unit
                     Name = "My Market",
                     Phone = "1234569871",
                     Website = "mymarket.com",
-                    //TODO handle operation times
-                    //Address = new Address
-                    //{
-                    //    City = "Columbia",
-                    //    State = _expectedState,
-                    //    StreetAddress = "123 Farmers Street",
-                    //    ZipCode = "65203"
-                    //}
+                    City = "Columbia",
+                    State = _expectedState,
+                    StreetAddress = "123 Farmers Street",
+                    ZipCode = "65203"
                },
                new FarmersMarket
                {
@@ -48,20 +44,17 @@ namespace FarmersMarketApi.Tests.FarmersMarketApplication.Unit
                     Name = "My Market",
                     Phone = "1234569871",
                     Website = "mymarket.com",
-                    //TODO handle operation times
-                    //Address = new Address
-                    //{
-                    //    City = "Columbia",
-                    //    State = _expectedState,
-                    //    StreetAddress = "123 Farmers Street",
-                    //    ZipCode = "65203"
-                    //}
+                    City = "Columbia",
+                    State = _expectedState,
+                    StreetAddress = "123 Farmers Street",
+                    ZipCode = "65203"
+
                }
             });
 
             var farmersMarkets = await _sut.GetFarmersMarketsAsync(_expectedState);
 
-            //Assert.IsTrue(farmersMarkets.All(mkt => mkt.Address.State.Equals(_expectedState)));
+            Assert.IsTrue(farmersMarkets.All(mkt => mkt.State.Equals(_expectedState)));
             Assert.IsTrue(farmersMarkets.Count == 2);
 
 
