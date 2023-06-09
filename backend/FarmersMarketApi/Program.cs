@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore;
 
-namespace IO.Swagger
+namespace FarmersMarketApi
 {
     /// <summary>
     /// Program

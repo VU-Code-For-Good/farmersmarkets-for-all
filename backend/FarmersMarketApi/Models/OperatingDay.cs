@@ -18,28 +18,21 @@ namespace FarmersMarketApi.Models
     /// 
     /// </summary>
     [DataContract]
-    public partial class ModelApiResponse : IEquatable<ModelApiResponse>
+    public partial class OperatingDay : IEquatable<OperatingDay>
     { 
         /// <summary>
-        /// Gets or Sets Code
+        /// Gets or Sets Day
         /// </summary>
 
-        [DataMember(Name="code")]
-        public int? Code { get; set; }
+        [DataMember(Name="day")]
+        public string Day { get; set; }
 
         /// <summary>
-        /// Gets or Sets Message
+        /// Gets or Sets OperatingHours
         /// </summary>
 
-        [DataMember(Name="message")]
-        public string Message { get; set; }
-
-        /// <summary>
-        /// Gets or Sets FarmersMarkets
-        /// </summary>
-
-        [DataMember(Name="FarmersMarkets")]
-        public List<FarmersMarket> FarmersMarkets { get; set; }
+        [DataMember(Name="operatingHours")]
+        public string OperatingHours { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -48,10 +41,9 @@ namespace FarmersMarketApi.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class ModelApiResponse {\n");
-            sb.Append("  Code: ").Append(Code).Append("\n");
-            sb.Append("  Message: ").Append(Message).Append("\n");
-            sb.Append("  FarmersMarkets: ").Append(FarmersMarkets).Append("\n");
+            sb.Append("class OperatingDay {\n");
+            sb.Append("  Day: ").Append(Day).Append("\n");
+            sb.Append("  OperatingHours: ").Append(OperatingHours).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -74,34 +66,29 @@ namespace FarmersMarketApi.Models
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((ModelApiResponse)obj);
+            return obj.GetType() == GetType() && Equals((OperatingDay)obj);
         }
 
         /// <summary>
-        /// Returns true if ModelApiResponse instances are equal
+        /// Returns true if OperatingDay instances are equal
         /// </summary>
-        /// <param name="other">Instance of ModelApiResponse to be compared</param>
+        /// <param name="other">Instance of OperatingDay to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ModelApiResponse other)
+        public bool Equals(OperatingDay other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
 
             return 
                 (
-                    Code == other.Code ||
-                    Code != null &&
-                    Code.Equals(other.Code)
+                    Day == other.Day ||
+                    Day != null &&
+                    Day.Equals(other.Day)
                 ) && 
                 (
-                    Message == other.Message ||
-                    Message != null &&
-                    Message.Equals(other.Message)
-                ) && 
-                (
-                    FarmersMarkets == other.FarmersMarkets ||
-                    FarmersMarkets != null &&
-                    FarmersMarkets.SequenceEqual(other.FarmersMarkets)
+                    OperatingHours == other.OperatingHours ||
+                    OperatingHours != null &&
+                    OperatingHours.Equals(other.OperatingHours)
                 );
         }
 
@@ -115,12 +102,10 @@ namespace FarmersMarketApi.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (Code != null)
-                    hashCode = hashCode * 59 + Code.GetHashCode();
-                    if (Message != null)
-                    hashCode = hashCode * 59 + Message.GetHashCode();
-                    if (FarmersMarkets != null)
-                    hashCode = hashCode * 59 + FarmersMarkets.GetHashCode();
+                    if (Day != null)
+                    hashCode = hashCode * 59 + Day.GetHashCode();
+                    if (OperatingHours != null)
+                    hashCode = hashCode * 59 + OperatingHours.GetHashCode();
                 return hashCode;
             }
         }
@@ -128,12 +113,12 @@ namespace FarmersMarketApi.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(ModelApiResponse left, ModelApiResponse right)
+        public static bool operator ==(OperatingDay left, OperatingDay right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(ModelApiResponse left, ModelApiResponse right)
+        public static bool operator !=(OperatingDay left, OperatingDay right)
         {
             return !Equals(left, right);
         }
