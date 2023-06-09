@@ -5,10 +5,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 	<ItemGroup>
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.5.0" />
   </ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\FarmersMarketApi.Application\FarmersMarketApi.Application.csproj" />
+	  <ProjectReference Include="..\FarmersMarketApi.Infrastructure\FarmersMarketApi.Infrastructure.csproj" />
+	</ItemGroup>
 </Project>
