@@ -1,40 +1,18 @@
 openapi: 3.0.3
 info:
   title: Farmer's Markets - OpenAPI 3.0
-  description: |-
-    Does cool stuff
+  description: Does cool stuff
   version: 1.0.11
 tags:
   - name: FarmersMarkets
     description: Get all Farmers Markets or farmers markets by state or zipcode that accept EBT/SNAP
 paths:
-  /farmersMarkets:
-    get:
-      tags:
-        - farmersMarkets
-      summary: Gets all farmers markets
-      operationId: GetFarmersMarkets
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ApiResponse'          
-        '500':
-          description: Unexpected error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResponse'     
   /farmersMarkets/{zipCode}:
     get:
       tags:
         - farmersMarkets
-      summary: Gets all Farmers Markets with 25 miles
-      description: Returns a collecction of farmers markets
+      summary: Gets all Farmers Markets for a zipcode
+      description: Returns a collection of farmers markets
       operationId: GetFarmersMarketsByZipcode
       parameters:
         - name: zipCode
@@ -43,35 +21,34 @@ paths:
           required: true
           schema:
             type: string
-            minLength: 5
-            maxLength: 5
+            pattern: '^\d{5}$'
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'   
+                $ref: '#/components/schemas/ApiResponse'
         '400':
           description: Invalid Zip Code
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'     
+                $ref: '#/components/schemas/ApiResponse'
         '404':
-          description: No Farmers Markets taht accepts SNAP
+          description: No Farmers Markets that accept SNAP
         '500':
           description: Unexpected error occurred
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'     
+                $ref: '#/components/schemas/ApiResponse'
   /farmersMarkets/{state}:
     get:
       tags:
         - farmersMarkets
-      summary: Gets all Farmers Markets with within the specified state
-      description: Returns a collecction of farmers markets
+      summary: Gets all Farmers Markets within the specified state
+      description: Returns a collection of farmers markets
       operationId: GetFarmersMarketsByState
       parameters:
         - name: state
@@ -88,25 +65,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'          
+                $ref: '#/components/schemas/ApiResponse'
         '400':
           description: Invalid State
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'     
+                $ref: '#/components/schemas/ApiResponse'
         '404':
-          description: No Farmers Markets taht accepts SNAP
+          description: No Farmers Markets that accept SNAP
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'     
+                $ref: '#/components/schemas/ApiResponse'
         '500':
           description: Unexpected error occurred
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ApiResponse'     
+                $ref: '#/components/schemas/ApiResponse'
 components:
   schemas:
     FarmersMarket:
@@ -168,4 +145,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FarmersMarket'
-  
