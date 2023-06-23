@@ -14,7 +14,7 @@ namespace FarmersMarketApi.Infrastructure.Repositories
             _farmersMarketContext = farmersMarketContext;
         }
 
-        public async Task<List<FarmersMarket>> GetFarmersMarkets(string state)
+        public async Task<List<FarmersMarket>> GetFarmersMarketsByState(string state)
         {
             var query = "SELECT fm.Id, fm.Name, ci.address " +
                         "FROM FarmersMarket fm " +
@@ -32,6 +32,29 @@ namespace FarmersMarketApi.Infrastructure.Repositories
                     return farmersMarket;
                 },
                 new { State = state },
+                splitOn: "address");
+
+            return result.AsList();
+        }
+
+        public async Task<List<FarmersMarket>> GetFarmersMarketsByZipCode(string zipCode)
+        {
+            var query = "SELECT fm.Id, fm.Name, ci.address " +
+                        "FROM FarmersMarket fm " +
+                        "INNER JOIN ContactInfo ci ON fm.contact = ci.id " +
+                        "WHERE ci.address LIKE '%' || @ZipCode || '%'";
+
+            using var connection = _farmersMarketContext.CreateConnection();
+            var result = await connection.QueryAsync<FarmersMarket, string, FarmersMarket>(query,
+                (farmersMarket, address) =>
+                {
+                    farmersMarket.StreetAddress = GetAddressComponent(address, 0);
+                    farmersMarket.City = GetAddressComponent(address, 1);
+                    farmersMarket.State = GetAddressComponent(address, 2);
+                    farmersMarket.ZipCode = GetAddressComponent(address, 3);
+                    return farmersMarket;
+                },
+                new { ZipCode = zipCode },
                 splitOn: "address");
 
             return result.AsList();

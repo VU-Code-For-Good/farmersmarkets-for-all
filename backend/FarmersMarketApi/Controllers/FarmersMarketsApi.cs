@@ -14,8 +14,8 @@ using FarmersMarketApi.Attributes;
 using FarmersMarketApi.Models;
 using FarmersMarketApi.Utilities;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
+using FarmersMarket = FarmersMarketApi.Models.FarmersMarket;
 
 namespace FarmersMarketApi.Controllers
 {
@@ -31,33 +31,7 @@ namespace FarmersMarketApi.Controllers
         {
             _farmersMarketBll = farmersMarketBll;
         }
-        /// <summary>
-        /// Gets all farmers markets
-        /// </summary>
-        /// <response code="200">successful operation</response>
-        /// <response code="500">Unexpected error occurred</response>
-        [HttpGet]
-        [Route("/farmersMarkets")]
-        [ValidateModelState]
-        [SwaggerOperation("GetFarmersMarkets")]
-        [SwaggerResponse(statusCode: 200, type: typeof(List<ModelApiResponse>), description: "successful operation")]
-        [SwaggerResponse(statusCode: 500, type: typeof(ModelApiResponse), description: "Unexpected error occurred")]
-        public virtual IActionResult GetFarmersMarkets()
-        {
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(List<ModelApiResponse>));
-
-            //TODO: Uncomment the next line to return response 500 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(500, default(ModelApiResponse));
-            string exampleJson = null;
-            exampleJson = "[ {\n  \"code\" : 0,\n  \"FarmersMarkets\" : [ {\n    \"zipCode\" : \"zipCode\",\n    \"isSnapFriendly\" : true,\n    \"website\" : \"website\",\n    \"operatingDays\" : \"operatingDays\",\n    \"operatingMonths\" : \"operatingMonths\",\n    \"city\" : \"city\",\n    \"socialMedia\" : [ {\n      \"links\" : \"links\"\n    }, {\n      \"links\" : \"links\"\n    } ],\n    \"Name\" : \"Name\",\n    \"phone\" : \"phone\",\n    \"streetAddress\" : \"streetAddress\",\n    \"operatingHours\" : \"operatingHours\",\n    \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"state\" : \"state\",\n    \"email\" : \"\"\n  }, {\n    \"zipCode\" : \"zipCode\",\n    \"isSnapFriendly\" : true,\n    \"website\" : \"website\",\n    \"operatingDays\" : \"operatingDays\",\n    \"operatingMonths\" : \"operatingMonths\",\n    \"city\" : \"city\",\n    \"socialMedia\" : [ {\n      \"links\" : \"links\"\n    }, {\n      \"links\" : \"links\"\n    } ],\n    \"Name\" : \"Name\",\n    \"phone\" : \"phone\",\n    \"streetAddress\" : \"streetAddress\",\n    \"operatingHours\" : \"operatingHours\",\n    \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"state\" : \"state\",\n    \"email\" : \"\"\n  } ],\n  \"message\" : \"message\"\n}, {\n  \"code\" : 0,\n  \"FarmersMarkets\" : [ {\n    \"zipCode\" : \"zipCode\",\n    \"isSnapFriendly\" : true,\n    \"website\" : \"website\",\n    \"operatingDays\" : \"operatingDays\",\n    \"operatingMonths\" : \"operatingMonths\",\n    \"city\" : \"city\",\n    \"socialMedia\" : [ {\n      \"links\" : \"links\"\n    }, {\n      \"links\" : \"links\"\n    } ],\n    \"Name\" : \"Name\",\n    \"phone\" : \"phone\",\n    \"streetAddress\" : \"streetAddress\",\n    \"operatingHours\" : \"operatingHours\",\n    \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"state\" : \"state\",\n    \"email\" : \"\"\n  }, {\n    \"zipCode\" : \"zipCode\",\n    \"isSnapFriendly\" : true,\n    \"website\" : \"website\",\n    \"operatingDays\" : \"operatingDays\",\n    \"operatingMonths\" : \"operatingMonths\",\n    \"city\" : \"city\",\n    \"socialMedia\" : [ {\n      \"links\" : \"links\"\n    }, {\n      \"links\" : \"links\"\n    } ],\n    \"Name\" : \"Name\",\n    \"phone\" : \"phone\",\n    \"streetAddress\" : \"streetAddress\",\n    \"operatingHours\" : \"operatingHours\",\n    \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\",\n    \"state\" : \"state\",\n    \"email\" : \"\"\n  } ],\n  \"message\" : \"message\"\n} ]";
-
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<List<ModelApiResponse>>(exampleJson)
-            : default(List<ModelApiResponse>);            //TODO: Change the data returned
-            return new ObjectResult(example);
-        }
-
+        
         /// <summary>
         /// Gets all Farmers Markets with within the specified state
         /// </summary>
@@ -89,7 +63,7 @@ namespace FarmersMarketApi.Controllers
 
             try
             {
-                var farmersMarkets = await _farmersMarketBll.GetFarmersMarketsAsync(state);
+                var farmersMarkets = await _farmersMarketBll.GetFarmersMarketsByStateAsync(state);
 
                 if (!farmersMarkets.Any())
                 {
@@ -131,35 +105,59 @@ namespace FarmersMarketApi.Controllers
         }
 
         /// <summary>
-        /// Gets all Farmers Markets with 25 miles
+        /// Gets all Farmers Markets for a zipcode
         /// </summary>
-        /// <remarks>Returns a collecction of farmers markets</remarks>
+        /// <remarks>Returns a collection of farmers markets</remarks>
         /// <param name="zipCode">zip code for user</param>
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid Zip Code</response>
-        /// <response code="404">No Farmers Markets taht accepts SNAP</response>
+        /// <response code="404">No Farmers Markets that accepts SNAP</response>
         /// <response code="500">Unexpected error occurred</response>
         [HttpGet]
-        [Route("/farmersMarkets/{zipCode:length(5,5)}")]
+        [Route("/farmersMarkets/{zipCode:regex(^\\d{{5}}$)}")]
         [ValidateModelState]
         [SwaggerOperation("GetFarmersMarketsByZipcode")]
-        [SwaggerResponse(statusCode: 200, type: typeof(ModelApiResponse), description: "successful operation")]
+        [SwaggerResponse(statusCode: 200, type: typeof(ModelApiResponse), description: "Successful operation")]
         [SwaggerResponse(statusCode: 400, type: typeof(ModelApiResponse), description: "Invalid Zip Code")]
         [SwaggerResponse(statusCode: 500, type: typeof(ModelApiResponse), description: "Unexpected error occurred")]
-        public virtual IActionResult GetFarmersMarketsByZipcode([FromRoute][Required] string zipCode)
+        public virtual async Task<IActionResult> GetFarmersMarketsByZipcode([FromRoute][Required] string zipCode)
         {
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(ModelApiResponse));
+            try
+            {
+                var farmersMarkets = await _farmersMarketBll.GetFarmersMarketsByZipCodeAsync(zipCode); 
+                
+                if (farmersMarkets.Count > 0)
+                {
+             
+                    return StatusCode(200, new ModelApiResponse
+                    {
+                        Code = 200,
+                        Message = "Successful operation",
+                        FarmersMarkets = farmersMarkets.Select(market => new FarmersMarket
+                        {
+                            Id = market.Id,
+                            Name = market.Name,
+                            Phone = market.Phone,
+                            StreetAddress = market.StreetAddress,
+                            City = market.City,
+                            State = market.State,
+                            ZipCode = market.ZipCode,
+                            Email = market.Email,
+                            Website = market.Website,
+                        }).ToList()
+                    });
+                }
 
-            //TODO: Uncomment the next line to return response 400 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(400, default(ModelApiResponse));
-
-            //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(404);
-
-            //TODO: Uncomment the next line to return response 500 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(500, default(ModelApiResponse));
-            return new ObjectResult(new List<ModelApiResponse>());
+                return StatusCode(404);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ModelApiResponse
+                {
+                    Code = 500,
+                    Message = "Unexpected error occurred: " + ex.Message
+                });
+            }
         }
     }
 }

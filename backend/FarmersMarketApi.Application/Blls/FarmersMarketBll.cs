@@ -11,8 +11,13 @@ public class FarmersMarketBll : IFarmersMarketBll
     {
         _farmersMarketRepository = farmersMarketRepository;
     }
-    public async Task<List<FarmersMarket>> GetFarmersMarketsAsync(string searchTerm)
+    public async Task<List<FarmersMarket>> GetFarmersMarketsByStateAsync(string searchTerm)
     {
-       return await _farmersMarketRepository.GetFarmersMarkets(searchTerm);
+       return await _farmersMarketRepository.GetFarmersMarketsByState(searchTerm);
+    }
+
+    public async Task<List<FarmersMarket>> GetFarmersMarketsByZipCodeAsync(string zipCode)
+    {
+        return await _farmersMarketRepository.GetFarmersMarketsByZipCode(zipCode);
     }
 }

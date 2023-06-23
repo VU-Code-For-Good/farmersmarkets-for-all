@@ -4,6 +4,7 @@ namespace FarmersMarketApi.Application.Blls
 {
     public interface IFarmersMarketBll
     {
-        Task<List<FarmersMarket>> GetFarmersMarketsAsync(string searchTerm);
+        Task<List<FarmersMarket>> GetFarmersMarketsByStateAsync(string state);
+        Task<List<FarmersMarket>> GetFarmersMarketsByZipCodeAsync(string zipCode);
     }
 }
