@@ -45,6 +45,7 @@ namespace FarmersMarketApi
         public void ConfigureServices(IServiceCollection services)
         {
             Batteries.Init();
+            services.AddHealthChecks();
             services.AddApplicationServices();
             services.AddInfrastructureServices();
             services.AddExternalInfrastructureServices(Configuration);
@@ -74,11 +75,12 @@ namespace FarmersMarketApi
                         Description = "Farmer's Markets - OpenAPI 3.0 (ASP.NET 6)",
                         Contact = new OpenApiContact()
                         {
-                           Name = "Swagger Codegen Contributors",
-                           Url = new Uri("https://github.com/swagger-api/swagger-codegen")
+                           Name = "Code for Good",
+                           Url = new Uri("https://github.com/VU-Code-For-Good/farmersmarkets-for-all")
                         }
                     });
                     c.CustomSchemaIds(type => type.FullName);
+                    c.EnableAnnotations();
                 
 
                     // Include DataAnnotation attributes on Controller Action parameters as Swagger validation rules (e.g required, pattern, ..)
@@ -101,13 +103,14 @@ namespace FarmersMarketApi
             // app.UseStaticFiles();
 
             app.UseAuthorization();
-
+            app.UseHealthChecks("/health");
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 //TODO: Either use the SwaggerGen generated Swagger contract (generated from C# classes)
                 c.SwaggerEndpoint("/swagger/1.0.11/swagger.json", "Farmer's Markets - OpenAPI 3.0");
-            
+                c.RoutePrefix = string.Empty;
+
 
                 //TODO: Or alternatively use the original Swagger contract that's included in the static files
                 // c.SwaggerEndpoint("/..swagger-original.json", "Farmer's Markets - OpenAPI 3.0 Original");
