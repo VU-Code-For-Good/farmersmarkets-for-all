@@ -26,10 +26,12 @@ namespace FarmersMarketApi.Controllers
     public class FarmersMarketsApiController : ControllerBase
     {
         private readonly IFarmersMarketBll _farmersMarketBll;
+        private readonly ILogger<FarmersMarketsApiController> _logger;
 
-        public FarmersMarketsApiController(IFarmersMarketBll farmersMarketBll)
+        public FarmersMarketsApiController(IFarmersMarketBll farmersMarketBll, ILogger<FarmersMarketsApiController> logger )
         {
             _farmersMarketBll = farmersMarketBll;
+            _logger = logger;
         }
         
         /// <summary>
@@ -53,11 +55,13 @@ namespace FarmersMarketApi.Controllers
         {
             if (!StateMap.States.TryGetValue(state.ToUpper(), out _))
             {
+                var message = $"{state} is not a valid US state.";
+                _logger.LogError(message);
                 return StatusCode(400, new ModelApiResponse
                 {
                     Code = 400,
                     FarmersMarkets = new List<FarmersMarket>(),
-                    Message = $"{state} is not a valid US state."
+                    Message = message
                 });
             }
 
@@ -67,11 +71,13 @@ namespace FarmersMarketApi.Controllers
 
                 if (!farmersMarkets.Any())
                 {
+                    var message = $"There are no farmers markets that accept SNAP in {state}.";
+                    _logger.LogError(message);
                     return StatusCode(404, new ModelApiResponse
                     {
                         Code = 404,
                         FarmersMarkets = new List<FarmersMarket>(),
-                        Message = $"There are no farmers markets that accept SNAP in {state}."
+                        Message = message
                     });
                 }
 
@@ -93,13 +99,14 @@ namespace FarmersMarketApi.Controllers
                 });
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError($"Message={e.Message}{Environment.NewLine}StackTrace={e.StackTrace}");
                 return StatusCode(500, new ModelApiResponse
                 {
                     Code = 500,
                     FarmersMarkets = new List<FarmersMarket>(),
-                    Message = "Unexpected error occurred."
+                    Message = "Unexpected error occurred. " + e.Message
                 });
             }
         }
@@ -148,10 +155,17 @@ namespace FarmersMarketApi.Controllers
                     });
                 }
 
-                return StatusCode(404);
+                var message = $"No farmers markets found in zipcode {zipCode}";
+                _logger.LogError(message);
+                return StatusCode(404, new ModelApiResponse
+                {
+                    Code = 404,
+                    Message = message,
+                });
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Message={ex.Message}{Environment.NewLine}StackTrace={ex.StackTrace}");
                 return StatusCode(500, new ModelApiResponse
                 {
                     Code = 500,
