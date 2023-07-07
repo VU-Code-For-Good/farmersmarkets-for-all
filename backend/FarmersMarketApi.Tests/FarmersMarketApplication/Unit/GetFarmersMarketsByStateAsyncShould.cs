@@ -1,6 +1,8 @@
 using FarmersMarketApi.Application.Blls;
 using FarmersMarketApi.Application.InfrastructureInterfaces;
+using FarmersMarketApi.Controllers;
 using FarmersMarketApi.Domain.Models;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -18,7 +20,8 @@ namespace FarmersMarketApi.Tests.FarmersMarketApplication.Unit
         {
             _expectedState = "MO";
             _farmersMarketRepository = new Mock<IFarmersMarketRepository>();
-            _sut = new FarmersMarketBll(_farmersMarketRepository.Object);
+            var mockLogger =  new Mock<ILogger<FarmersMarketBll>>();
+            _sut = new FarmersMarketBll(_farmersMarketRepository.Object, mockLogger.Object);
         }
 
         [TestMethod]

@@ -8,6 +8,7 @@ using FarmersMarketApi.Domain.Models;
 using FarmersMarketApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using FarmersMarket = FarmersMarketApi.Domain.Models.FarmersMarket;
@@ -25,7 +26,8 @@ namespace FarmersMarketApi.Tests.FarmersMarketApi.Unit
         public void SetUp()
         {
             _farmersMarketBll = new Mock<IFarmersMarketBll>();
-            _sut = new FarmersMarketsApiController(_farmersMarketBll.Object);
+            var _mockLogger = new Mock<ILogger<FarmersMarketsApiController>>();
+            _sut = new FarmersMarketsApiController(_farmersMarketBll.Object, _mockLogger.Object);
         }
 
         [TestMethod]
