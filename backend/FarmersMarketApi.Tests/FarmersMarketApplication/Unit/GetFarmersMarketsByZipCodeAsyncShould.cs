@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FarmersMarketApi.Domain.Models;
+using Microsoft.Extensions.Logging;
 
 namespace FarmersMarketApi.Tests.FarmersMarketApplication.Unit
 {
@@ -23,7 +24,8 @@ namespace FarmersMarketApi.Tests.FarmersMarketApplication.Unit
         {
             _expectedZipCode = "123456";
             _farmersMarketRepository = new Mock<IFarmersMarketRepository>();
-            _sut = new FarmersMarketBll(_farmersMarketRepository.Object);
+            var _logger = new Mock<ILogger<FarmersMarketBll>>();
+            _sut = new FarmersMarketBll(_farmersMarketRepository.Object, _logger.Object);
         }
 
         [TestMethod]
