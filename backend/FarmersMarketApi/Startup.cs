@@ -45,7 +45,8 @@ namespace FarmersMarketApi
         public void ConfigureServices(IServiceCollection services)
         {
             Batteries.Init();
-            services.AddHealthChecks();
+            services.AddHealthChecks()
+            .AddCheck("FarmersMarketDb", new Infrastructure.Contexts.SqliteHealthCheck(Configuration["AppConfiguration:FarmersMarketSqliteFilePath"]));
             services.AddApplicationServices();
             services.AddInfrastructureServices();
             services.AddExternalInfrastructureServices(Configuration);
