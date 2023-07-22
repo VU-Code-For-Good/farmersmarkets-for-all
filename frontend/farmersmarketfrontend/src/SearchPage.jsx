@@ -1,7 +1,9 @@
 import Header from "./Header"
 import SearchBar from "./SearchBar"
+import StateSelect from "./components/StateSelect"
+import ZipCodeInput from "./components/ZipCodeInput"
 
-function App() {
+function SearchPage() {
   return (
     <>
       <div>
@@ -15,4 +17,4 @@ function App() {
   )
 }
 
-export default App
+export default SearchPage
