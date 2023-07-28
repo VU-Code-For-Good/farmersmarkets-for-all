@@ -19,6 +19,7 @@ namespace FarmersMarketApi.Infrastructure
         public static IServiceCollection AddExternalInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IFarmersMarketContext>(new FarmersMarketContext(configuration["AppConfiguration:FarmersMarketSqliteFilePath"]));
+            services.AddSingleton<SqliteHealthCheck>();
             return services;
         }
 

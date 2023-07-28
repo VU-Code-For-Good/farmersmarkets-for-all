@@ -50,10 +50,7 @@ namespace FarmersMarketApi
         {
             Batteries.Init();
             //services.AddSingleton<IHealthCheck, SqliteHealthCheck>();
-            services.AddHealthChecks()
-                .AddCheck("Sample", () => HealthCheckResult.Unhealthy("A unhealthy result."));
-
-                
+           
             services.AddApplicationServices();
             services.AddInfrastructureServices();
             services.AddExternalInfrastructureServices(Configuration);
@@ -111,7 +108,6 @@ namespace FarmersMarketApi
             // app.UseStaticFiles();
 
             app.UseAuthorization();
-            app.UseHealthChecks("/health");
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

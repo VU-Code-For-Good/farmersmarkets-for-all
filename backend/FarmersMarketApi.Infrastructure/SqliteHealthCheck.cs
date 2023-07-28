@@ -1,13 +1,13 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace FarmersMarketApi
+namespace FarmersMarketApi.Infrastructure
 {
-    public class SqliteHealthCheck : IHealthCheck
+    public class SqliteHealthCheck
     {
         private readonly string _connectionString = "FarmersMarket.db";
 
-        public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
+        public async Task<HealthCheckResult> CheckHealthAsync(CancellationToken cancellationToken = default)
         {
             try
             {
@@ -22,12 +22,12 @@ namespace FarmersMarketApi
                     }
 
                 
-                    return HealthCheckResult.Healthy("Healthy");
+                    return HealthCheckResult.Healthy("Healthy Database.");
                 }
             }
             catch (Exception ex)
             {
-                return HealthCheckResult.Unhealthy("Database connection failure", ex);
+                return HealthCheckResult.Unhealthy("Database connection failure.", ex);
             }
         }
     }
