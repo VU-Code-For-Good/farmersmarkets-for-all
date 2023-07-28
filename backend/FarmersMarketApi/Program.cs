@@ -14,7 +14,7 @@ namespace FarmersMarketApi
         public static void Main(string[] args)
         {
             var builder = CreateWebHostBuilder(args);
-
+            
             builder.ConfigureLogging(logging =>
             {
                 logging.ClearProviders();

@@ -49,11 +49,10 @@ namespace FarmersMarketApi
         public void ConfigureServices(IServiceCollection services)
         {
             Batteries.Init();
-            //services.AddSingleton<IHealthCheck, SqliteHealthCheck>();
-            services.AddHealthChecks()
-                .AddCheck("Sample", () => HealthCheckResult.Unhealthy("A unhealthy result."));
 
-                
+            services.AddSingleton<SqliteHealthCheck>();
+
+
             services.AddApplicationServices();
             services.AddInfrastructureServices();
             services.AddExternalInfrastructureServices(Configuration);
@@ -107,11 +106,12 @@ namespace FarmersMarketApi
         {
             app.UseRouting();
 
+
             //TODO: Uncomment this if you need wwwroot folder
             // app.UseStaticFiles();
+            //app.UseHealthChecks("/health");
 
             app.UseAuthorization();
-            app.UseHealthChecks("/health");
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -127,10 +127,11 @@ namespace FarmersMarketApi
 
             //TODO: Use Https Redirection
             // app.UseHttpsRedirection();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
             });
 
             if (env.IsDevelopment())
