@@ -11,6 +11,10 @@
 using FarmersMarketApi.Application;
 using FarmersMarketApi.Filters;
 using FarmersMarketApi.Infrastructure;
+using FarmersMarketApi.Infrastructure.Contexts;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -45,8 +49,11 @@ namespace FarmersMarketApi
         public void ConfigureServices(IServiceCollection services)
         {
             Batteries.Init();
+            //services.AddSingleton<IHealthCheck, SqliteHealthCheck>();
             services.AddHealthChecks()
-            .AddCheck("FarmersMarketDb", new Infrastructure.Contexts.SqliteHealthCheck(Configuration["AppConfiguration:FarmersMarketSqliteFilePath"]));
+                .AddCheck("Sample", () => HealthCheckResult.Unhealthy("A unhealthy result."));
+
+                
             services.AddApplicationServices();
             services.AddInfrastructureServices();
             services.AddExternalInfrastructureServices(Configuration);

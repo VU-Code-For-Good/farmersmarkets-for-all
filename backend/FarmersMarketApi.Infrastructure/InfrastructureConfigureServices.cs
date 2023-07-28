@@ -3,7 +3,7 @@ using FarmersMarketApi.Infrastructure.Contexts;
 using FarmersMarketApi.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 
 namespace FarmersMarketApi.Infrastructure

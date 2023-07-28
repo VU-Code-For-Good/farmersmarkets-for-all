@@ -1,22 +1,17 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace FarmersMarketApi.Infrastructure.Contexts
+namespace FarmersMarketApi
 {
     public class SqliteHealthCheck : IHealthCheck
     {
-        private readonly string _connectionString;
-
-        public SqliteHealthCheck(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
+        private readonly string _connectionString = "FarmersMarket.db";
 
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
             try
             {
-                using (var connection = new SqliteConnection(_connectionString))
+                using (var connection = new SqliteConnection($"Data Source={_connectionString}"))
                 {
                     await connection.OpenAsync(cancellationToken);
 
@@ -27,7 +22,7 @@ namespace FarmersMarketApi.Infrastructure.Contexts
                     }
 
                 
-                    return HealthCheckResult.Healthy();
+                    return HealthCheckResult.Healthy("Healthy");
                 }
             }
             catch (Exception ex)
