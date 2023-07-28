@@ -72,9 +72,9 @@ namespace FarmersMarketApi.Tests.FarmersMarketApi.Unit
             var result = await _sut.GetFarmersMarketsByZipcode(zipCode);
 
             // Assert
-            Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
-            var statusCodeResult = (StatusCodeResult)result;
-            Assert.AreEqual(StatusCodes.Status404NotFound, statusCodeResult.StatusCode);
+            Assert.IsInstanceOfType(result, typeof(ObjectResult));
+            var objectResult = (ObjectResult)result;
+            Assert.AreEqual(StatusCodes.Status404NotFound, objectResult.StatusCode);
         }
 
         [TestMethod]
