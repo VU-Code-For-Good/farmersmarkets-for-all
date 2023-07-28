@@ -49,8 +49,6 @@ namespace FarmersMarketApi
         public void ConfigureServices(IServiceCollection services)
         {
             Batteries.Init();
-            //services.AddSingleton<IHealthCheck, SqliteHealthCheck>();
-           
             services.AddApplicationServices();
             services.AddInfrastructureServices();
             services.AddExternalInfrastructureServices(Configuration);
