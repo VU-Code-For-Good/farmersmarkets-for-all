@@ -1,0 +1,4 @@
+cfafarmersmarket.eastus.cloudapp.azure.com
+{
+        reverse_proxy 0.0.0.0:8080
+}
