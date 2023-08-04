@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 
 
-
 namespace FarmersMarketApi.Infrastructure
 {
     public static class InfrastructureConfigureServices
@@ -19,6 +18,7 @@ namespace FarmersMarketApi.Infrastructure
         public static IServiceCollection AddExternalInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IFarmersMarketContext>(new FarmersMarketContext(configuration["AppConfiguration:FarmersMarketSqliteFilePath"]));
+            services.AddSingleton<SqliteHealthCheck>();
             return services;
         }
 
