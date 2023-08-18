@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {FarmersMarketsApiApi} from './farmersmarketapi/apis/farmers-markets-api-api';
 import { Configuration } from './farmersmarketapi/configuration';
+import { FarmersMarketApiModelsFarmersMarket} from './farmersmarketapi/models';
 
 function APITest() {
     const configuration = new Configuration({basePath: 'https://cfafarmersmarket.eastus.cloudapp.azure.com'});
@@ -9,11 +10,16 @@ function APITest() {
     const [apiWorks, setApiWorks] = useState(false);
 
     //TODO this will work once CORS is enabled on the API
-    api.farmersMarketsStateGet('CA').then((response) => {
-      console.log(response);
-      setApiWorks(true);
-    });
-
+    if (!apiWorks){
+      api.farmersMarketsStateGet('CA').then((response) => {
+        var farmersMarketRaw : FarmersMarketApiModelsFarmersMarket[] = (response.data.farmersMarkets) as FarmersMarketApiModelsFarmersMarket[];
+        const farmersMarkets: FarmersMarket[] = (farmersMarketRaw).map(mapFarmersMarket);
+  
+        console.log(farmersMarkets);
+        setApiWorks(true);
+      });
+    }
+    
     return (
       <div className="mx-8 w-full">
         {/* If api works * show api works p tag*/}
