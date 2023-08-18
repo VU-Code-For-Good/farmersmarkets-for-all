@@ -90,6 +90,21 @@ namespace FarmersMarketApi
                     // Use [ValidateModelState] on Actions to actually validate it in C# as well!
                     c.OperationFilter<GeneratePathParamsValidationFilter>();
                 });
+
+            var originsToAllow = GetOriginsToAllow();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("FarmersMarketsForAll",
+                    builder =>
+                    {
+                        builder
+                            .WithOrigins(originsToAllow)
+                            .SetIsOriginAllowedToAllowWildcardSubdomains()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
+
         }
 
         /// <summary>
@@ -139,5 +154,12 @@ namespace FarmersMarketApi
                 app.UseHsts();
             }
         }
+
+        private string[] GetOriginsToAllow()
+        {
+            var originsToAllow = Configuration["AppConfiguration:ClientOriginUrl"].Split(',').Select(item => item.Trim()).ToList();
+            return originsToAllow.ToArray();
+        }
+
     }
 }
