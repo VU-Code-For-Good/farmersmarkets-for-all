@@ -12,12 +12,12 @@ To get started with Farmers Markets for All, follow these steps:
 
 1. Clone this repository to your local machine.
 2. Install the following dependencies:
-   - Angular CLI
+   - Node.js
    - .NET 6 SDK
    - SQLite
 3. To run the frontend, navigate to the frontend directory and run the following command:
 
-`ng serve`  
+`npm run dev`  
 
 To run the backend, navigate to the backend directory and run the following command:  
 `dotnet run`
