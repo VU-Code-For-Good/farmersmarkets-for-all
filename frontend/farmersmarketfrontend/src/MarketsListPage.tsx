@@ -21,7 +21,7 @@ function MarketsListPage() {
     const searchParams = new URLSearchParams(location.search);
 
     const state: string | null = searchParams.get('state');
-    const zipcode: string | null = searchParams.get('zipcode');
+    const zipcode: string | null = searchParams.get('zipcode'); //e.g 65203
 
 
     //TODO this will work once CORS is enabled on the API
