@@ -2,7 +2,11 @@ import React from 'react';
 import StateItem from './StateItem';
 import StateChip from './StateChip';
 
-function StateDirectory() {
+interface stateProps {
+  onStateSelectedCallback: (stateName: string) => void;
+}
+
+function StateDirectory(props: stateProps) {
     //array of StateItem called statesDirectories
     const statesDirectories: StateItem[] = [];
 
@@ -58,9 +62,8 @@ function StateDirectory() {
     statesDirectories.push({name: "Wyoming", imageSrc: "/states/wyoming.png", link: ""})
 
    const onStateSelected = (stateName: string) => {
-      //alert what state was selected
-      alert(stateName);
-    }
+      props.onStateSelectedCallback(stateName)
+   }
   
    return (
     <div className="states-block__content">
