@@ -1,10 +1,10 @@
 import { useState } from "react"
 import Header from "./Header"
-import SearchBar from "./SearchBar"
 import StateDirectory from "./StateDirectory/StateDirectory"
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import stateAbbr from "./utils/stateAbbr";
+import ZipSearch from "./zipsearch";
 
 const App = () => {
   const navigate = useNavigate();
@@ -13,6 +13,11 @@ const App = () => {
     var stateAbbreviation = stateAbbr(stateName, 'abbr');
     // Redirect to a specific route, for example: `/states/:stateName`
     navigate(`/listmarkets/?state=${stateAbbreviation}`);
+  };
+
+  const onZipSelected = (zipCode: string) => {
+    // Redirect to a specific route, for example: `/zip/:zipCode`
+    navigate(`/listmarkets/?zipcode=${zipCode}`);
   };
 
   return (
@@ -26,8 +31,15 @@ const App = () => {
         <StateDirectory onStateSelectedCallback={onStateSelected}></StateDirectory>
       </div>
 
-      <div className="search-form flex items-center justify-center min-h-screen">
-        <SearchBar></SearchBar>
+      <div className="text-center">
+    <h1 className="center-text">Or by Zipcode</h1>
+  </div>  
+      <br>
+      </br>
+
+      <div>
+        {/* Use the zipsearch component */}
+        <ZipSearch onSubmit={onZipSelected}></ZipSearch>
       </div>
     </>
   );

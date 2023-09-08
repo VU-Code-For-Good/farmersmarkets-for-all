@@ -69,7 +69,7 @@ function StateDirectory(props: stateProps) {
     <div className="states-block__content">
       <h2 className="text-center">State Directories</h2>
 
-      <p className="text-center">
+      <p className="text-center mt-2 mb-4">
         Select your state
       </p>
       <div className="grid grid-cols-8 gap-2 mx-4">
