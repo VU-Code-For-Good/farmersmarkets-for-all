@@ -2,6 +2,7 @@ import { useState } from "react"
 import Header from "./Header"
 import SearchBar from "./SearchBar"
 import StateDirectory from "./StateDirectory/StateDirectory"
+import ChatBotView from "./chatbot/ChatBot"
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import stateAbbr from "./utils/stateAbbr";
@@ -28,6 +29,9 @@ const App = () => {
 
       <div className="search-form flex items-center justify-center min-h-screen">
         <SearchBar></SearchBar>
+      </div>
+      <div>
+        <ChatBotView/>
       </div>
     </>
   );
