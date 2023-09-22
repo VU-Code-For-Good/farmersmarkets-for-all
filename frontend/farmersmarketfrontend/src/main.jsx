@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import MarketsListPage from './MarketsListPage'
 import './styles.css'
-
+import { render } from "react-dom";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -20,8 +20,4 @@ const router = createBrowserRouter([
   }
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-)
+render(  <RouterProvider router={router} />, document.getElementById("root"));
