@@ -6,6 +6,7 @@ import { FarmersMarketsApiApi } from './farmersmarketapi/apis/farmers-markets-ap
 import { FarmersMarketApiModelsFarmersMarket } from './farmersmarketapi/models';
 import FarmersMarketList from './FarmersMarketList';
 import { useLocation } from 'react-router-dom';
+import ZipcodeSearch from './ZipcodeSearch';
 
 function MarketsListPage() {
 
@@ -56,11 +57,21 @@ function MarketsListPage() {
     }
 
     return (
-        <div className="mx-8 w-full">
-            <h1 className = "text-lg"> Viewing Markets for {state || zipcode}</h1>
+        <div className="">
+            <div className="mx-8 flex justify-between items-center">
+                <h1 className="text-lg">Viewing Markets for {state || zipcode}</h1>
+                <div>
+                    {zipcode == null ? <ZipcodeSearch selectedState={state} /> : null}
+                </div>
+            </div>
+           
+            {/* Tailwind divider */}
+            <div className="mx-8 my-4 border-t border-black"></div>
 
             {/* Render a list of farmers markets with the FarmersMarketCard component */}
-            <FarmersMarketList marketsList={farmersMarkets} />
+            <div className = "mb-8">
+                <FarmersMarketList marketsList={farmersMarkets} />
+            </div>
         </div>
     );
 

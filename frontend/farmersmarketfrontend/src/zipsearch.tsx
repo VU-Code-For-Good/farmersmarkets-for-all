@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { useForm } from "react-hook-form";
 
 interface StateData {
     zipcode: string;

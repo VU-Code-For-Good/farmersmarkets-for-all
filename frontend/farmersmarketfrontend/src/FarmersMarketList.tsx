@@ -8,7 +8,7 @@ interface FarmersMarketListProps {
 
 const FarmersMarketList: React.FC<FarmersMarketListProps> = (markets) => {
   return (
-    <div className="mx-8 w-full">
+    <div className="mx-8">
         {/* Render a list of farmers markets with the FarmersMarketCard component */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {markets.marketsList.map((market) => (
