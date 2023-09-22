@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Header from "./Header"
 import StateDirectory from "./StateDirectory/StateDirectory"
+import ChatBotView from "./chatbot/ChatBot"
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import stateAbbr from "./utils/stateAbbr";
@@ -40,6 +41,9 @@ const App = () => {
       <div>
         {/* Use the zipsearch component */}
         <ZipSearch onSubmit={onZipSelected}></ZipSearch>
+      </div>
+      <div>
+        <ChatBotView/>
       </div>
     </>
   );
